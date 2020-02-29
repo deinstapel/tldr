@@ -14,7 +14,7 @@
     "build": "npm run lint && npm run build:ts",
     "build:ts": "tsc -p tsconfig.module.json && tsc -p tsconfig.cjs.json",
     "build:docs": "typedoc --out docs --readme README.md --target esnext --theme default --mode file src --ignoreCompilerErrors",
-    "lint": "tslint -c tslint.json src/**/*.ts -p .",
+    "lint": "eslint src/**/*.ts",
     "test": "echo \"Error: no test specified\" && exit 1",
     "example": "ts-node -r tsconfig-paths/register -P tsconfig.example.json example/$*",
     "semantic-release": "semantic-release",
@@ -47,11 +47,17 @@
   "homepage": "https://github.com/deinstapel/tldr#readme",
   "dependencies": {},
   "devDependencies": {
-    "semantic-release": "^15.13.18",
-    "ts-node": "^8.3.0",
-    "tsconfig-paths": "^3.8.0",
-    "tslint": "^5.18.0",
-    "typedoc": "^0.15.0-0",
-    "typescript": "^3.5.3"
+    "@typescript-eslint/eslint-plugin": "^2.21.0",
+    "@typescript-eslint/eslint-plugin-tslint": "^2.21.0",
+    "@typescript-eslint/parser": "^2.21.0",
+    "eslint": "^6.8.0",
+    "eslint-plugin-prefer-arrow": "^1.1.7",
+    "semantic-release": "^17.0.4",
+    "ts-node": "^8.6.2",
+    "tsconfig-paths": "^3.9.0",
+    "tslint": "^6.0.0",
+    "typedoc": "^0.16.11",
+    "typescript": "^3.8.3",
+    "typescript-eslint": "0.0.1-alpha.0"
   }
 }
