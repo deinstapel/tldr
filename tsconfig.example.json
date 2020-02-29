@@ -1,0 +1,10 @@
+{
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "noImplicitAny": false,
+    "baseUrl": ".",
+    "paths": {
+      "@deinstapel/tldr": ["src/index"],
+    }
+  }
+}

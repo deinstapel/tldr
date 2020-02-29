@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "moduleResolution": "node",
+    "target": "es2015",
+    "module": "commonjs",
+    "experimentalDecorators": true,
+    "noImplicitAny": true,
+    "lib": ["es2015", "dom"],
+    "declaration": false,
+    "strict": true,
+    "types": [],
+    "typeRoots": [
+      "node_modules/@types"
+    ],
+    "sourceMap": false,
+    "inlineSourceMap": true
+  },
+  "include": [
+    "src"
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "outDir": "build/module",
+    "module": "es2015",
+    "declaration": true,
+    "declarationDir": "build/types",
+    "sourceMap": true,
+    "inlineSourceMap": false
+  },
+  "include": [ "src" ]
+}
