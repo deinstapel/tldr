@@ -1,7 +1,7 @@
 import { ILogBackend, LogVariables } from '../Backend';
 
 export type FilterFunction = (value: any) => boolean;
-export type FilterConfig = { [contextVar: string]: string | RegExp | FilterFunction }
+export type FilterConfig = { [contextVar: string]: any | RegExp | FilterFunction }
 
 export class ContextFilterBackend implements ILogBackend {
   private backends: ILogBackend[];
@@ -14,12 +14,12 @@ export class ContextFilterBackend implements ILogBackend {
         if (!x[1](context[x[0]])) {
           return;
         }
-      } else if (typeof x[1] === 'string') {
-        if (x[1] !== context[x[0]]) {
+      } else if (x[1] instanceof RegExp) {
+        if (!x[1].exec(context[x[0]])) {
           return;
         }
       } else {
-        if (!x[1].exec(context[x[0]])) {
+        if (x[1] !== context[x[0]]) {
           return;
         }
       }
