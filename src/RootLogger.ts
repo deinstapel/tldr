@@ -1,5 +1,5 @@
 import { Logger, IInternalRootLogger } from './Logger';
-import { LogVariables } from './Backend';
+import { LogVariables, ILogBackend } from './Backend';
 
 /**
  * Public Interface for the root logger, allows for dynamic updates and initial
@@ -9,7 +9,13 @@ import { LogVariables } from './Backend';
 export interface IRootLogger {
   configureInstance(params: any): void;
   updateGlobalFields(fields: LogVariables): void;
+  addBackends(...backends: ILogBackend[]): void;
 }
+
+export type Configuration = {
+  globalContext: LogVariables;
+  backends: ILogBackend[];
+};
 
 export class RootLogger extends Logger implements IInternalRootLogger, IRootLogger {
   /**
@@ -36,18 +42,30 @@ export class RootLogger extends Logger implements IInternalRootLogger, IRootLogg
    * but no variables can be deleted.
    * @param fields The new set of fields to set within the logger. Will be shallow-cloned.
    */
-  updateGlobalFields(fields: LogVariables): void {
+  public updateGlobalFields(fields: LogVariables): void {
     this.rootContext = Object.assign({}, this.rootContext, fields);
   }
 
   /**
    * Configure the logger.
-   * @param params
+   * @param params global context and backends to use.
    */
-  configureInstance(params: any): void {
+  public configureInstance(params: Configuration): void {
     if (this.configured) {
       throw new Error('Logger already configured');
     }
-    params.foo = params.bar;
+    this.rootContext = Object.assign({}, this.rootContext, params.globalContext);
+    this.backends = params.backends;
+    this.configured = true;
+  }
+
+  /**
+   * Add backends to an existing logger globally.
+   * @param backends Backends to add.
+   */
+  public addBackends(...backends: ILogBackend[]): void {
+    if (backends.length) {
+      this.backends.push(...backends);
+    }
   }
 }

@@ -18,14 +18,14 @@ export class Logger {
   constructor(
     protected root: (Logger & IInternalRootLogger),
     private context: LogVariables,
-    private backends: ILogBackend[],
+    protected backends: ILogBackend[],
   ) { }
 
   /**
    * Creates a new derived logger with the given variables.
    * @param fields The data to merge into the existing context.
    */
-  public withData(fields: LogVariables): Logger {
+  public withFields(fields: LogVariables): Logger {
     return new Logger(this.root, Object.assign({}, this.context, fields), this.backends);
   }
 
@@ -35,7 +35,7 @@ export class Logger {
    * @param value Field value to annotate.
    */
   public withField(field: string, value: any): Logger {
-    return this.withData({ [field]: value });
+    return this.withFields({ [field]: value });
   }
 
   /**
@@ -53,7 +53,7 @@ export class Logger {
    * **WARNING**: Arbitrary log levels will break other plugins down in the processing chain.
    */
   public log(level: string, msg: string): void {
-    const time = +Date.now();
+    const time = new Date();
     this.backends.forEach(backend => {
       setTimeout(() => {
         try {
