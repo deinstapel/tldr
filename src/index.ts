@@ -10,3 +10,5 @@ import { RootLogger } from './RootLogger';
 export const Logger = new RootLogger();
 export { ConsoleBackend as BrowserConsoleBackend } from './backends/console-browser';
 export { ConsoleBackend as NodeConsoleBackend } from './backends/console-node';
+export { ContextFilterBackend } from './backends/context-filter';
+export { LevelFilterBackend } from './backends/level-filter';
