@@ -40,6 +40,9 @@
     "Johann Wagner",
     "Marten Gartner"
   ],
+  "publishConfig": {
+    "access": "public"
+  },
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/deinstapel/tldr/issues"
