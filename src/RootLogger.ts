@@ -55,7 +55,9 @@ export class RootLogger extends Logger implements IInternalRootLogger, IRootLogg
       throw new Error('Logger already configured');
     }
     this.rootContext = Object.assign({}, this.rootContext, params.globalContext);
-    this.backends = [...this.backends, ...params.backends];
+    if (params.backends.length) {
+      this.backends.push(...params.backends);
+    }
     this.configured = true;
   }
 
