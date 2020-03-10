@@ -25,3 +25,5 @@ Logger.withFields({
  * Annotate a single field and log a message with custom log level
  */
 Logger.withField('answer', 42).log('customlevel', 'custom message')
+
+Logger.withField('err', new Error('test error')).debug('test');

@@ -4,6 +4,7 @@
 /* eslint-disable no-console */
 import { ILogBackend, LogVariables } from '../Backend';
 import * as chalk from 'chalk';
+import { format } from 'util';
 
 const DEFAULT_COLOR_MAP: ColorStyleMap = {
   trace: chalk.gray,
@@ -45,8 +46,8 @@ export class ConsoleBackend implements ILogBackend {
       // Human readable output supports coloring.
       const shouldAddColor = this.options.color && this.options.colorStyleMap[level];
       const coloredLevel = shouldAddColor ? this.options.colorStyleMap[level](level) : level;
-      const contextFormat = Object.keys(context).map(key => `${key}=${context[key]}`).join(' ');
-      const message = `[${ts.toISOString()}] ${coloredLevel} ${msg} ${contextFormat}`;
+      const contextFormat = Object.keys(context).map(key => `${key}=${format(context[key])}`).join(' ');
+      const message = `[${ts.toISOString()}] ${coloredLevel} ${format(msg)} ${contextFormat}`;
       console.log(message);
     }
   }
