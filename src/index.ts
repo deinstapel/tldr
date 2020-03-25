@@ -12,3 +12,4 @@ export { ConsoleBackend as BrowserConsoleBackend } from './backends/console-brow
 export { ConsoleBackend as NodeConsoleBackend } from './backends/console-node';
 export { ContextFilterBackend } from './backends/context-filter';
 export { LevelFilterBackend } from './backends/level-filter';
+export { Logger as DerivedLogger } from "./Logger"
