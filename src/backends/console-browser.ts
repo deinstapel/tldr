@@ -43,14 +43,12 @@ export class ConsoleBackend implements ILogBackend {
     } else {
       // Human readable output supports coloring.
       const shouldAddColor = this.options.color && this.options.colorStyleMap[level];
-      const coloredLevel = shouldAddColor ? `%c${level}%c` : level;
       const contextEntries = Object.keys(context).map(key => [key, '=', context[key]]);
       const contextFormat = ([] as any[]).concat(...contextEntries);
-      const message = [`[${ts.toISOString()}] ${coloredLevel} ${msg}`, ...contextFormat];
       if (shouldAddColor) {
-        console.log(...message, this.options.colorStyleMap[level], 'color: initial');
+        console.log(`[${ts.toISOString()}] %c${level}%c ${msg}`, this.options.colorStyleMap[level], 'color: initial', ...contextFormat);
       } else {
-        console.log(...message);
+        console.log(`[${ts.toISOString()}] ${level} ${msg}`, ...contextFormat);
       }
     }
   }
