@@ -15,3 +15,4 @@ export { ContextFilterBackend } from './backends/context-filter';
 export { LevelFilterBackend } from './backends/level-filter';
 export { BufferedBackend } from './backends/buffered';
 export { Logger as DerivedLogger } from './Logger'
+export { ILogBackend, LogVariables } from './Backend';
