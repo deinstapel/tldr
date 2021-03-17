@@ -25,4 +25,7 @@ export class BufferedBackend implements ILogBackend {
     this.backends.push(b);
     this.buffer.forEach(v => b.write(...v));
   }
+  removeBackend(b: ILogBackend): void {
+    this.backends = this.backends.filter(v => v !== b);
+  }
 }
