@@ -7,9 +7,11 @@ import { RootLogger } from './RootLogger';
  * Johann Wagner
  * Marten Gartner
  */
+// eslint-disable-next-line @typescript-eslint/naming-convention
 export const Logger = new RootLogger();
 export { ConsoleBackend as BrowserConsoleBackend } from './backends/console-browser';
 export { ConsoleBackend as NodeConsoleBackend } from './backends/console-node';
 export { ContextFilterBackend } from './backends/context-filter';
 export { LevelFilterBackend } from './backends/level-filter';
-export { Logger as DerivedLogger } from "./Logger"
+export { BufferedBackend } from './backends/buffered';
+export { Logger as DerivedLogger } from './Logger'

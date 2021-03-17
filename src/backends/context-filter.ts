@@ -1,7 +1,8 @@
 import { ILogBackend, LogVariables } from '../Backend';
+import { typedKeys } from '../util/typedObject';
 
 export type FilterFunction = (value: any) => boolean;
-export type FilterConfig = { [contextVar: string]: any | RegExp | FilterFunction }
+export type FilterConfig = { [contextVar: string]: unknown | RegExp | FilterFunction }
 
 export class ContextFilterBackend implements ILogBackend {
   private backends: ILogBackend[];
@@ -9,17 +10,18 @@ export class ContextFilterBackend implements ILogBackend {
     this.backends = pushTo.slice();
   }
   write(context: LogVariables, level: string, msg: string, ts: Date): void {
-    for (const x of Object.entries(this.config)) {
-      if (typeof x[1] === 'function') {
-        if (!x[1](context[x[0]])) {
+    for (const k of typedKeys(this.config)) {
+      const v = this.config[k]
+      if (typeof v === 'function') {
+        if (!v(context[k])) {
           return;
         }
-      } else if (x[1] instanceof RegExp) {
-        if (!x[1].exec(context[x[0]])) {
+      } else if (v instanceof RegExp) {
+        if (!v.exec(context[k])) {
           return;
         }
       } else {
-        if (x[1] !== context[x[0]]) {
+        if (v !== context[k]) {
           return;
         }
       }
